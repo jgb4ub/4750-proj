@@ -7,7 +7,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
   $username = trim($_POST['username']);
   $password = trim($_POST['password']);
   if (authenticate($username, $password)){
-    header(location: 'profile.php');
+    echo "yayyy";
 
   } else {
     $login_err = "Invalid username or password."

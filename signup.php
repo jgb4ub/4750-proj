@@ -6,7 +6,7 @@ require("account.php");
 
 
 $username = $password = $first_name = $last_name = $email = $confrim_password= "";
-$username_err = $password_err= $conf_password_err="";
+$username_err = $password_err= $conf_password_err=$hashed_password="";
 
 // Processing form data when form is submitted
 if($_SERVER["REQUEST_METHOD"] == "POST"){
@@ -33,6 +33,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
           $first_name = trim($_POST["firstname"]);
           $last_name = trim($_POST["lastname"]);
           $email = trim($_POST["email"]);
+          $hashed_password = password_hash($password, PASSWORD_DEFAULT);
           makeAccount($username, $password, $first_name, $last_name, $email);
           header("Location: http://cs.virginia.edu/~les6ye/CS4750/project/success.php");
         }
