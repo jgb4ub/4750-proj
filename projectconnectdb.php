@@ -37,7 +37,7 @@ $dbname = 'les6ye_restaurant_data';
 
 $dsn = "mysql:host=$host;dbname=$dbname";
 $db = "";
-
+$dsn_Options = [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION];
 /** connect to the database **/
 try
 {

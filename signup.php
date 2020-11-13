@@ -5,7 +5,6 @@ require("account.php");
 
 
 
-// Define variables and initialize with empty values
 $username = $password = $first_name = $last_name = $email = $confrim_password= "";
 $username_err = $password_err= $conf_password_err="";
 
@@ -34,10 +33,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
           $first_name = trim($_POST["firstname"]);
           $last_name = trim($_POST["lastname"]);
           $email = trim($_POST["email"]);
-          //makeAccount($username, $password, $first_name, $last_name, $email);
+          makeAccount($username, $password, $first_name, $last_name, $email);
         }
 
       }
+
+
 
     }
 
