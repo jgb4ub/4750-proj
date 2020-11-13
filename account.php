@@ -30,6 +30,10 @@ function userExists($username)
   return FALSE;
 
 }
+function userLogin($username, $password)
+{
+
+}
 
 
 ?>
