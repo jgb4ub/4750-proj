@@ -20,7 +20,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         $username = trim($_POST["username"]);
         $password = trim($_POST["password"]);
         $confirm_password = trim($_POST['confrimpassword']);
-        if(userExists($param_username)){
+        if(userExists($username)){
           $username_err='Username already exists';
         }
         if(strlen($password)< 8){
@@ -34,13 +34,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
           $last_name = trim($_POST["lastname"]);
           $email = trim($_POST["email"]);
           makeAccount($username, $password, $first_name, $last_name, $email);
+          header("Location: http://cs.virginia.edu/~les6ye/CS4750/project/success.php");
         }
 
       }
-
-
-
-    }
+}
 
  ?>
 

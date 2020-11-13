@@ -1,7 +1,10 @@
 <?php
+require 'projectconnectdb.php';
+
 if($_SERVER['REQUEST_METHOD']=='POST'){
   if(!empty($_POST['action']) && $_POST['action']=='Login'){
-    header(loaction:'login.php');
+    //header("Location: http://cs.virginia.edu/~les6ye/CS4750/project/login.php");
+    echo "cool";
   }
 }
 ?>
