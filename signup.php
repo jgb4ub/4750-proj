@@ -1,12 +1,12 @@
 <?php
 // Include config file
 require("projectconnectdb.php");
-require("createaccount.php");
+require("account.php");
 
 
 
 // Define variables and initialize with empty values
-$username = $password = $first_name = $last_name = $email = "";
+$username = $password = $first_name = $last_name = $email = $confrim_password= "";
 $username_err = $password_err= $conf_password_err="";
 
 // Processing form data when form is submitted
@@ -18,23 +18,23 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     //     $password_err = "Please enter a password.";
     // }
      if (!empty($_POST['action']) && ($_POST['action'] == 'Submit')){
-        $param_username = trim($_POST["username"]);
-        $param_password = trim($_POST["password"]);
+        $username = trim($_POST["username"]);
+        $password = trim($_POST["password"]);
         $confirm_password = trim($_POST['confrimpassword']);
         if(userExists($param_username)){
           $username_err='Username already exists';
         }
-        if(strlen($param_password)< 8){
+        if(strlen($password)< 8){
           $password_err = "Password must have at least 8 characters";
         }
-        else if($param_password != $confirm_password){
+        else if($password != $confirm_password){
           $conf_password_err="Passwords did not match";
         }
         else if( empty($username_err) && empty($password_err) && empty($conf_password_err)){
-          $param_first_name = trim($_POST["firstname"]);
-          $param_last_name = trim($_POST["lastname"]);
-          $param_email = trim($_POST["email"]);
-          //echo makeAccount($param_username, $param_password, $param_first_name, $param_last_name, $param_email);
+          $first_name = trim($_POST["firstname"]);
+          $last_name = trim($_POST["lastname"]);
+          $email = trim($_POST["email"]);
+          //makeAccount($username, $password, $first_name, $last_name, $email);
         }
 
       }

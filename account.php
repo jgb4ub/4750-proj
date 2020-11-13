@@ -4,14 +4,15 @@ function makeAccount($username, $password, $first_name, $last_name, $email)
 {
     global $db;
     $query = 'INSERT INTO user VALUES(:username, :password, :first_name, :last_name, :email)';
-    $stmt = $db->prepare($query);
-    $stmt->bindValue(':username', $username);
-    $stmt->bindValue(':password', password_hash($password, PASSWORLD_DEFAULT));
-    $stmt->bindValue(':first_name', $first_name);
-    $stmt->bindValue(':last_name', $last_name);
-    $stmt->bindValue(':email', $email);
-    $stmt->execute();
-
+    if($stmt = $db->prepare($query)){
+      $stmt->bindValue(':username', $username);
+      $stmt->bindValue(':password', password_hash($password, PASSWORD_DEFAULT);
+      $stmt->bindValue(':first_name', $first_name);
+      $stmt->bindValue(':last_name', $last_name);
+      $stmt->bindValue(':email', $email);
+      if ($stmt->execute()){
+        echo "this happened";
+      }
     $stmt->closeCursor();
 }
 
@@ -30,10 +31,27 @@ function userExists($username)
   return FALSE;
 
 }
+
+function displayUsers(){
+  global $db;
+  $results = null;
+  $query = 'SELECT * FROM User';
+  if($stmt = $db->prepare($query))
+  {
+    if($stmt->execute())
+    {
+      $results = $stmt->fetchAll();
+    }
+  };
+
+  $stmt->closeCursor();
+  return $results;
+}
 function userLogin($username, $password)
 {
 
 }
+
 
 
 ?>
