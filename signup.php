@@ -1,6 +1,6 @@
 <?php
 // Include config file
-require_once "projectconnectdb.php";
+require "projectconnectdb.php";
 
 // Define variables and initialize with empty values
 $username = $password = $confirm_password = "";
