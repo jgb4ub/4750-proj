@@ -11,6 +11,7 @@ function makeAccount($username, $password, $first_name, $last_name, $email)
     $stmt->bindParam(':last_name', $last_name, PDO::PARAM_STR);
     $stmt->bindParam(':email', $email, PDO::PARAM_STR);
     $param_password = password_hash($password, PASSWORD_DEFAULT);
+    $stm->execute()
 }
 
 function userExists($username)
@@ -25,5 +26,6 @@ function userExists($username)
   return FALSE;
 
 }
+
 
 ?>
