@@ -17,14 +17,14 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     // if(empty(trim($_POST["password"]))){
     //     $password_err = "Please enter a password.";
     // }
-    //  else{
-    //     $param_username = trim($_POST["username"]);
-    //     $param_password = trim($_POST["password"]);
-    //     $param_first_name = trim($_POST["first_name"]);
-    //     $param_last_name = trim($_POST["last_name"]);
-    //     $param_email = trim($_POST["email"]);
-    echo "<p> hi </p>";
-        //echo makeAccount($param_username, $param_password, $param_first_name, $param_last_name, $param_email);
+     if (!empty($_POST['action']) && ($_POST['action'] == 'Add')){
+        $param_username = trim($_POST["username"]);
+        $param_password = trim($_POST["password"]);
+        $param_first_name = trim($_POST["firstname"]);
+        $param_last_name = trim($_POST["lastname"]);
+        $param_email = trim($_POST["email"]);
+      }
+    //     //echo makeAccount($param_username, $param_password, $param_first_name, $param_last_name, $param_email);
     }
 
  ?>
@@ -46,6 +46,18 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
          <h2>Sign Up</h2>
          <p>Please fill this form to create an account.</p>
          <form action="signup.php",  method="post">
+           <div class='form-group'>
+             <label>First Name</label>
+             <input type='text', name='firstname' class='form-control' required>
+           </div>
+           <div class='form-group'>
+             <label>Last Name</label>
+             <input type='text', name='lastname' class='form-control' required>
+           </div>
+           <div class='form-group'>
+             <label>Email</label>
+             <input type='text', name='email' class='form-control' required>
+           </div>
              <div class="form-group">
                  <label>Username</label>
                  <input type="text" name="username" class="form-control" required>
@@ -55,7 +67,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                  <input type="password" name="password" class="form-control" required>
              </div>
              <div class="form-group">
-                 <input type="submit" name='action' class="btn btn-primary" title="Submit">
+                 <input type="submit" value='Add', name='action' class="btn btn-primary" title="Submit">
                  <input type="reset" name='action' class="btn btn-default" title="Reset">
              </div>
              <p>Already have an account? <a href="login.php">Login here</a>.</p>

@@ -2,9 +2,9 @@
 
 function makeAccount($username, $password, $first_name, $last_name, $email)
 {
-    global $db
-    $query = 'INSERT INTO user VALUES(:username, :password, :first_name, :last_name, :email)'
-    $stmt = $db->prepare($query)
+    global $db;
+    $query = 'INSERT INTO user VALUES(:username, :password, :first_name, :last_name, :email)';
+    $stmt = $db->prepare($query);
     $stmt->bindValue(':username', $username);
     $stmt->bindValue(':password', password_hash($password, PASSWORLD_DEFAULT));
     $stmt->bindValue(':first_name', $first_name);
@@ -12,17 +12,17 @@ function makeAccount($username, $password, $first_name, $last_name, $email)
     $stmt->bindValue(':email', $email);
     $stmt->execute();
 
-    $stmt->execute();
+    $stmt->closeCursor();
 }
 
 function userExists($username)
 {
-  global $db
+  global $db;
   $query = "SELECT * FROM user WHERE username = :username";
   $stmt = $db->prepare($query);
   $stmt-> bindValue(':username', $username);
   $stmt->execute();
-  $stmt->closeCursor();
+
   if ($stmt->rowCount()==1){
     $stmt->closeCursor();
     return TRUE;
