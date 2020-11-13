@@ -1,5 +1,6 @@
 <?php
 require 'projectconnect.db';
+
 echo "<p>hi</p>";
 function makeAccount($username, $password, $first_name, $last_name, $email)
 {
