@@ -1,6 +1,6 @@
 <?php
 require 'projectconnect.db';
-
+echo "<p>hi</p>";
 function makeAccount($username, $password, $first_name, $last_name, $email)
 {
     $stmt = $db->prepare('INSERT INTO user (username, password, first_name, last_name, email);
@@ -11,7 +11,7 @@ function makeAccount($username, $password, $first_name, $last_name, $email)
     $stmt->bindParam(':last_name', $last_name, PDO::PARAM_STR);
     $stmt->bindParam(':email', $email, PDO::PARAM_STR);
     $param_password = password_hash($password, PASSWORD_DEFAULT);
-    $stm->execute()
+    $stmt->execute();
 }
 
 function userExists($username)
