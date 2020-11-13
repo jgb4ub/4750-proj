@@ -1,11 +1,13 @@
 <?php
 // Include config file
-require_once "projectconnectdb.php";
-//include "createaccount.php";
+require("projectconnectdb.php");
+require("createaccount.php");
+
+
 
 // Define variables and initialize with empty values
 $username = $password = $first_name = $last_name = $email = "";
-$username_err = $password_err = "";
+
 
 // Processing form data when form is submitted
 if($_SERVER["REQUEST_METHOD"] == "POST"){
@@ -56,7 +58,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                  <input type="submit" name='action' class="btn btn-primary" title="Submit">
                  <input type="reset" name='action' class="btn btn-default" title="Reset">
              </div>
-             <p>Already have an account? <a href="">Login here</a>.</p>
+             <p>Already have an account? <a href="login.php">Login here</a>.</p>
          </form>
      </div>
  </body>
