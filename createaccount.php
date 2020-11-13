@@ -2,16 +2,17 @@
 
 function makeAccount($username, $password, $first_name, $last_name, $email)
 {
-    // global $db
-    // $stmt = $db->prepare('INSERT INTO user (username, password, first_name, last_name, email);
-    // VALUES (:username, :password, :first_name, :last_name, :email)');
-    // $stmt->bindParam(':username', $username, PDO::PARAM_STR);
-    // $stmt->bindParam(':password', $param_password, PDO::PARAM_STR);
-    // $stmt->bindParam(':first_name', $first_name, PDO::PARAM_STR );
-    // $stmt->bindParam(':last_name', $last_name, PDO::PARAM_STR);
-    // $stmt->bindParam(':email', $email, PDO::PARAM_STR);
-    // $param_password = password_hash($password, PASSWORD_DEFAULT);
-    // $stmt->execute();
+    global $db
+    $query = 'INSERT INTO user VALUES(:username, :password, :first_name, :last_name, :email)'
+    $stmt = $db->prepare($query)
+    $stmt->bindValue(':username', $username);
+    $stmt->bindValue(':password', password_hash($password, PASSWORLD_DEFAULT));
+    $stmt->bindValue(':first_name', $first_name);
+    $stmt->bindValue(':last_name', $last_name);
+    $stmt->bindValue(':email', $email);
+    $stmt->execute();
+
+    $stmt->execute();
 }
 
 function userExists($username)
@@ -22,11 +23,11 @@ function userExists($username)
   $stmt-> bindValue(':username', $username);
   $stmt->execute();
   $stmt->closeCursor();
-  // if ($stmt->rowCount()==1){
-  //   $stmt->closeCursor();
-  //   return TRUE;
-  // }
-  // return FALSE;
+  if ($stmt->rowCount()==1){
+    $stmt->closeCursor();
+    return TRUE;
+  }
+  return FALSE;
 
 }
 
