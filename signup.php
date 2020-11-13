@@ -1,3 +1,32 @@
+<?php
+// Include config file
+require_once "projectconnectdb.php";
+include "createaccount.php";
+
+// Define variables and initialize with empty values
+$username = $password = $first_name = $last_name = $email"";
+
+// Processing form data when form is submitted
+if($_SERVER["REQUEST_METHOD"] == "POST"){
+    if(empty(trim($_POST["username"]))){
+        $username_err = "Please enter a username.";
+    }
+    if(empty(trim($_POST["password"]))){
+        $password_err = "Please enter a password.";
+    }
+    else{
+        $param_username = trim($_POST["username"]);
+        $param_password = trim($_POST["password"]);
+        $param_first_name = trim($_POST["first_name"]);
+        $param_last_name = trim($_POST["last_name"]);
+        $param_email = trim($_POST["email"]);
+
+        echo makeAccount($param_username, $param_password, $param_first_name, $param_last_name, $param_email);
+    }
+}
+ ?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
