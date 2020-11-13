@@ -8,9 +8,10 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
   $password = trim($_POST['password']);
   if (authenticate($username, $password)){
     header(location: 'profile.php');
-    
-  }
 
+  } else {
+    $login_err = "Invalid username or password."
+  }
 }
  ?>
 
@@ -41,7 +42,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
             </div>
             <div class="form-group">
                 <input type="submit" class="btn btn-primary" value="Submit">
-                <span type='help-block'
+                <span type='help-block' color='red'> <?php echo $login_err; ?> </span>
                 <input type="reset" class="btn btn-default" value="Reset">
             </div>
             <p>Don't have an account? <a href="signup.php">Sign up here</a>.</p>
