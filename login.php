@@ -1,14 +1,17 @@
 <?php
 require 'projectconnectdb.php';
 require 'account.php';
-$username = $password = '';
+$username = '';
 $login_err = "";
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
   $username = trim($_POST['username']);
   $password = trim($_POST['password']);
   if (authenticate($username, $password)){
-    echo "yayyy";
+    echo 'authenticated';
+    session_start();
+    $_SESSION['username'] = $username;
     /// add redirect link to profile.php
+    echo "yayyy";
   } else {
     $login_err = "Invalid username or password.";
   }
