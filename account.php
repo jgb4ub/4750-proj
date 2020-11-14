@@ -61,6 +61,7 @@ function displayUsers()
 //     global $db;
 //     $auth = FALSE;
 //     $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+
 //     $query = 'SELECT * FROM User WHERE Username = :username AND Password = :password';
 //     if($stmt = $db->prepare($query)){
 //         $stmt->bindValue(':username', $username);
