@@ -5,7 +5,7 @@ require("account.php");
 
 
 
-$username = $password = $first_name = $last_name = $email = $confrim_password= "";
+$username = $first_name = $last_name = $email = $confrim_password= "";
 $username_err = $password_err= $conf_password_err="";
 //echo password_hash("password", PASSWORD_DEFAULT);
 
