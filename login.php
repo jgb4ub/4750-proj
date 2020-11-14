@@ -1,6 +1,6 @@
 <?php
-require 'projectconnectdb.php'
-require 'account.php'
+require 'projectconnectdb.php';
+require 'account.php';
 $username = $password = '';
 $login_err = "";
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
@@ -8,9 +8,9 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
   $password = trim($_POST['password']);
   if (authenticate($username, $password)){
     echo "yayyy";
-
+    /// add redirect link to profile.php
   } else {
-    $login_err = "Invalid username or password."
+    $login_err = "Invalid username or password.";
   }
 }
  ?>
