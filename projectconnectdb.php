@@ -37,12 +37,12 @@ $dbname = 'les6ye_restaurant_data';
 
 $dsn = "mysql:host=$host;dbname=$dbname";
 $db = "";
-
+$dsn_Options = [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION];
 /** connect to the database **/
 try
 {
    $db = new PDO($dsn, $username, $password);
-   echo "<p>You are connected to the database</p>";
+   echo "<p>Database connected successfully</p>";
 }
 catch (PDOException $e)     // handle a PDO exception (errors thrown by the PDO library)
 {
