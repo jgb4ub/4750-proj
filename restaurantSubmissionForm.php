@@ -48,7 +48,7 @@ require("restaurant.php");
         }
 
         if (empty($nameErr) && empty($typeErr) && empty($phoneErr) && empty($priceErr)){
-            makeRestaurant($)
+            makeRestaurant($name, $type, $phone, $price)
         }
     }
 
