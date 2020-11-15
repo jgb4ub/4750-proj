@@ -81,7 +81,7 @@ function getReviewById($review_id)
 	return $results;
 }
 
-
+/*
 
  //THE HARD CODED ONE THAT EXECUTES - for testing connection between review.php and review_function
 function updateReview()
@@ -91,15 +91,15 @@ echo " inside updateReviewWWWWWWWWW/";
 
 global $db;
 
-	$query = "UPDATE Review SET Review_text='THIS IS HARD CODED' WHERE Review_id=2";
+	$query = "UPDATE Review SET Review_text='THIS IS HARD CODED yessirre' WHERE Review_id=2";
     $statement = $db->prepare($query);
 	$statement->execute();
 }
-
+*/
 
 // COMMENTED OUT CAUSE IT DOESN'T WORK
 
-/*
+
 function updateReview($review_id, $review_text, $rating, $date)
 {
 	global $db;
@@ -109,8 +109,8 @@ function updateReview($review_id, $review_text, $rating, $date)
 	$statement->bindValue(':review_id', $review_id);
 	$statement->bindValue(':review_text', $review_text);
 	$statement->bindValue(':rating', $rating);
-	$statement->bindValue(':date', $date);
-	$statement->execute();
+	#$statement->bindValue(':date', $date);
+	#$statement->execute();
 
 	if ($statement->execute()){
 	echo " updateReview executed/";
@@ -120,7 +120,7 @@ function updateReview($review_id, $review_text, $rating, $date)
 	}
 	$statement->closeCursor();
 }
-*/
+
 
 
 // COMMENTED OUT CAUSE IT DOESN'T WORK
