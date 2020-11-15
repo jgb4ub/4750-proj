@@ -1,6 +1,8 @@
 <?php
 require("projectconnectdb.php");
 require("restaurant.php");
+session_start();
+echo $_SESSION['username'];
  ?>
  <!DOCTYPE HTML>
  <html>
@@ -62,20 +64,32 @@ function test_input($data) {
     <th>Type</th>
     <th>Phone</th>
     <th>Price</th>
+    <th>Like?</th>
   </tr>
+
 <?php
+
 if ($restaurantList){
     foreach ($restaurantList as $restaurant){
+
         echo '<tr>';
         foreach ($restaurant as $att){
             echo '<td>'.$att.'</td>';
+
         }
+        ?>
+        <form method="post" action="userLikedRestaurants.php">
+        <td><input type="hidden" name="like_id" value="<?php echo $restaurant['Restaurant_id']; ?>"><input type="submit" class="form-control" name="like" value="Like"></td>
+        </form>
+        <?php
         echo '</tr>';
+        #echo print_r($restaurant['Restaurant_id']);
         #echo " | <br>";
 
     }
     echo '<br>';
 }
+
 
 ?>
 </table>

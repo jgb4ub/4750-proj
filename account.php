@@ -68,9 +68,13 @@ function authenticate($username, $password)
           if($stmt->rowCount() == 1 ){
             $row = $stmt->fetch();
             $hashed_password = $row['Password'];
-            
+
             if(crypt($password, $hashed_password)== $hashed_password){
               $auth = TRUE;
+
+              session_start();
+              $_SESSION['username'] = $username;
+
               $stmt->closeCursor();
             }
           }

@@ -13,6 +13,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     $login_err = "Invalid username or password.";
   }
 }
+echo $_SESSION['username'];
  ?>
 
 
