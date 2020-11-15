@@ -25,7 +25,7 @@ function getAllReviews($username)
 	echo " fetched all (made array)/";
 
 	// closes the cursor and frees the connection to the server so other SQL statements may be issued
-	$statement->closecursor();
+	$statement->closeCursor();
 
 	return $results;
 
@@ -76,10 +76,16 @@ function getReviewById($review_id)
 
 	$results = $statement->fetch();
 
-	$statement->closecursor();
+	$statement->closeCursor();
 
 	return $results;
 }
+
+
+
+
+
+
 
 /*
 function updateReview($review_id, $review_text, $rating, $date)
@@ -105,21 +111,36 @@ function updateReview($review_id, $review_text, $rating, $date)
 */
 
 
+
+
+
+
+
+
+
+ //the working one
+
+
 function updateReview($review_id, $username, $restaurant_id, $restaurant_name, $review_text, $rating, $date, $liked)
 {
-	global $db;
 
-	$query = "UPDATE Review SET Username = :username, Restaurant_id = :restaurant_id, Restaurant_name = :restaurant_name, Review_text=:review_text, Rating=:rating, Liked = :liked WHERE Review_id=:review_id";
-	$statement = $db->prepare($query);
+echo " hjklhjklhjklhjk/";
+
+global $db;
+
+	//$query = "UPDATE Review SET Review_text='teeeeeeeeeeeeeeeeesting' WHERE Review_id=2";
+	$query = "UPDATE Review SET Username = :username, Restaurant_id = :restaurant_id, Restaurant_name = :restaurant_name, Review_text=:review_text, Rating=:rating, Date= :date, Liked = :liked WHERE Review_id=:review_id";
+    $statement = $db->prepare($query);
+
+    $statement->bindValue(':review_id', $review_id);
 	$statement->bindValue(':username', $username);
 	$statement->bindValue(':restaurant_id', $restaurant_id);
 	$statement->bindValue(':restaurant_name', $restaurant_name);
-	$statement->bindValue(':liked', $liked);
-	$statement->bindValue(':review_id', $review_id);
-
 	$statement->bindValue(':review_text', $review_text);
 	$statement->bindValue(':rating', $rating);
 	$statement->bindValue(':date', $date);
+	$statement->bindValue(':liked', $liked);
+
 	$statement->execute();
 
 	if ($statement->execute()){
@@ -128,17 +149,25 @@ function updateReview($review_id, $username, $restaurant_id, $restaurant_name, $
 	else {
 	echo " updateReview couldn't execute/";
 	}
+
 	$statement->closeCursor();
 }
 
 
-/*
+
+
+
+
+
+
+
 function deleteReview($review_id)
 {
 
-    echo " inside deleteReview/"
-
 	global $db;
+
+	echo " inside deleteReview/";
+
 	$query = "DELETE FROM Review WHERE Review_id=:review_id";
 	$statement = $db->prepare($query);
 	$statement->bindValue(':review_id', $review_id);
@@ -154,5 +183,5 @@ function deleteReview($review_id)
 	$statement->closeCursor();  // release hold on this connection
 }
 
-*/
+
  ?>

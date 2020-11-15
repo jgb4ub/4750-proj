@@ -1,14 +1,16 @@
 <?php
 
+
 session_start();
+require 'account.php';
 require 'projectconnectdb.php';
 require 'review_functions.php';
-require 'account.php';
+
 
 $reviews = getAllReviews($_SESSION["username"]); // an array of arrays for displaying the table of the user's reviews
 $review_to_update = null; //sets equal to review_id after clicking update, then is set to an array of the row for that reivew_id
 
-echo "Welcome " . $_SESSION["username"];
+echo "Welcome " . $_SESSION["username"] . "/";
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST')
 {
@@ -29,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 		print_r ($reviews); // show us what's in the user's table
 	}
 
-	/* //need to comment out for now cause it won't display the table
+
 	else if (!empty($_POST['action']) && $_POST['action'] == 'Delete')
 	{
 	    echo " Delete button clicked";
@@ -40,13 +42,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 
 		$reviews = getAllReviews($_SESSION["username"]);
 	}
-	*/
+
 
 	if (!empty($_POST['action']) && ($_POST['action'] == 'Confirm update'))
 	{
 
-		updateReview($_POST["review_id"], $_POST["username"], $_POST["restaurant_id"], $_POST["restaurant_name"], $_POST["review_text"], $_POST["rating"], $_POST["date"], $_POST["liked"]);
+		updateReview($_POST['review_id'], $_SESSION['username'], $_POST['restaurant_id'], $_POST['restaurant_name'], $_POST['review_text'], $_POST['rating'], $_POST['date'], $_POST['liked']);
+
 		$reviews = getAllReviews($_SESSION["username"]); //update the table after updating the review
+
+
 	}
 
 
@@ -177,12 +182,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
     <td>
 
 
-    <!--  <form action="<?php $_SERVER['PHP_SELF'] ?>" method="post">
+    <form action="<?php $_SERVER['PHP_SELF'] ?>" method="post">
         <input type="submit" value="Delete" name="action" class="btn btn-danger" title="Permanently delete the record" />
         <input type="hidden" name="review_to_delete" value="<?php echo $item[0] ?>" />
 
      </form>
-     -->
+
     </td>
   </tr>
   <?php endforeach; ?>
