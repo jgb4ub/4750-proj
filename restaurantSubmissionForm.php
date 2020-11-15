@@ -15,13 +15,14 @@ require("restaurant.php");
     <?php
     // define variables and set to empty values
     $nameErr = $typeErr = $phoneErr = $priceErr = "";
-    $name = $type = $phone = $price = "";
+    $name = $type = $phone = $phoneTemp = $price = "";
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if (empty($_POST["name"])) {
             $nameErr = "Restaurant name is required";
         } else {
             $name = test_input($_POST["name"]);
+
             // check if name only contains letters and whitespace
             if (!preg_match("/^[a-zA-Z-' ]*$/",$name)) {
                 $nameErr = "Only letters and white space allowed";
@@ -36,10 +37,13 @@ require("restaurant.php");
 
         }
 
-        $phone = preg_replace('/[^0-9]/', '', $_POST['phone']);
-        if(strlen($phone) !== 10) {
+        $phoneTemp = preg_replace('/[^0-9]/', '', $_POST['phoneTemp']);
+
+        if(strlen($phoneTemp) !== 10) {
             $phoneErr = "Please enter a real phone number";
         }
+
+        $phone = substr($phoneTemp, 0, 3)."-".substr($phoneTemp, -7, -4)."-".substr($phoneTemp, -4);
 
         if (empty($_POST["price"])) {
             $priceErr = "Price is required";
@@ -48,7 +52,7 @@ require("restaurant.php");
         }
 
         if (empty($nameErr) && empty($typeErr) && empty($phoneErr) && empty($priceErr)){
-            makeRestaurant($name, $type, $phone, $price)
+            makeRestaurant($name, $type, $phone, $price);
         }
     }
 
@@ -69,7 +73,7 @@ require("restaurant.php");
         Type: <input type="text" name="type" value="<?php echo $type;?>">
         <span class="error">* <?php echo $typeErr;?></span>
         <br><br>
-        Phone: <input type="text" name="phone" value="<?php echo $phone;?>">
+        Phone: <input type="text" name="phoneTemp" value="<?php echo $phone;?>">
         <span class="error">*<?php echo $phoneErr;?></span>
         <br><br>
         Price:

@@ -4,13 +4,13 @@ function makeRestaurant($name, $type, $phone, $price){
 
     global $db;
 
-    $query = $db->prepare('INSERT INTO Restaurant VALUES (:name, :food_type, :phone_number, :price)');
-    $query->bindValue(":name", $name);
-    $query->bindValue(":food_type", $type);
-    $query->bindValue(":phone_number", $phone);
-    $query->bindValue(":pricee", $price);
+    $query = $db->prepare('INSERT INTO Restaurant (name, food_type, phone_number, price) VALUES ( :name, :food_type, :phone_number, :price)');
+    #$query->bindValue(":name", $name);
+    #$query->bindValue(":food_type", $type);
+    #$query->bindValue(":phone_number", $phone);
+    #$query->bindValue(":price", $price);
     echo "hi";
-    if ($query->execute()){
+    if ($query->execute(['name' => $name, 'food_type' => $type, 'phone_number' => $phone, 'price' => $price])){
     echo "this happened";
     }
     else {
@@ -42,9 +42,9 @@ function filterRestaurants($name){
     $query = $db->prepare('SELECT  * FROM Restaurant WHERE lower(name) like ? ');
     #$query->bindValue(":name", lower($name));
     $var = ("%$name%");
-    echo "hi";
+    #echo "hi";
     if ($query->execute([$var])){
-    echo "this happened";
+    #echo "this happened";
     $val = $query->fetchAll(PDO::FETCH_ASSOC);
     }
     else {
