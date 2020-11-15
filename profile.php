@@ -69,6 +69,12 @@ $fiveStars = " &#9733 &#9733 &#9733 &#9733 &#9733";
     padding: 10px;
     margin: 20px
 }
+.logoutLblPos{
+
+   position:fixed;
+   right:10px;
+   top:5px;
+}
 
 </style>
 <script>
@@ -85,6 +91,13 @@ $(document).ready(function(){
 	});
 });
 </script>
+<form align="right" method="post" action='logout.php'>
+	<label class='logoutLblPos'>
+		<input name='logout' type='submit' value='Logout'>
+	</label>
+</form>
+
+
 </head>
 <body>
 <div class="container">
