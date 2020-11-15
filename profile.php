@@ -23,6 +23,9 @@ $fiveStars = " &#9733 &#9733 &#9733 &#9733 &#9733";
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
@@ -97,9 +100,19 @@ $(document).ready(function(){
 	</label>
 </form>
 
-
 </head>
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="#">Home</a></li>
+      <li><a href="searchRestaurants.php">Restaurants</a></li>
+      <li><a href="#">Reviews</a></li>
+      <li><a href="profile.php">Profile</a></li>
+    </ul>
+  </div>
+</nav>
 <body>
+
 <div class="container">
     <div class="header">
     <h2 font-family: "Roboto", sans-serif;>My Reviews:</h2>
