@@ -2,7 +2,14 @@
 // Include config file
 require("projectconnectdb.php");
 require("profilefunctions.php");
-getReviewedRestaurants("byakobowitzl");
+//$restaurantResults = getReviewedRestaurants("byakobowitzl");
+$reviews = getReviews("byakobowitzl");
+$oneStar = " &#9733";
+$twoStars = " &#9733 &#9733";
+$threeStars = " &#9733 &#9733 &#9733";
+$fourStars = " &#9733 &#9733 &#9733 &#9733";
+$fiveStars = " &#9733 &#9733 &#9733 &#9733 &#9733";
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -57,7 +64,7 @@ getReviewedRestaurants("byakobowitzl");
 	transform: rotate(180deg);
 }
 .header{
-    padding: 20px;
+    padding: 10px;
     margin: 20px
 }
 
@@ -80,53 +87,46 @@ $(document).ready(function(){
 <body>
 <div class="container">
     <div class="header">
-    <h2>My Reviews</h2> </div>
-	<div class="row">
-		<div class="col-lg-8 offset-lg-2">
-			<div class="accordion mt-5" id="accordionExample">
-				<div class="card">
-					<div class="card-header" id="headingOne">
-						<h2 class="clearfix mb-0">
-							<a class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">Collapsible Group Item #1 <i class="fa fa-angle-down"></i></a>
-						</h2>
-					</div>
-					<div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
-						<div class="card-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eu sem tempor, varius quam at, luctus dui. Mauris magna metus, dapibus nec turpis vel, semper malesuada ante. Vestibulum id metus ac nisl bibendum scelerisque non non purus. Suspendisse varius nibh non aliquet sagittis. In tincidunt orci sit amet elementum vestibulum.</div>
-					</div>
-				</div>
-				<div class="card">
-					<div class="card-header" id="headingTwo">
-						<h2 class="mb-0">
-							<a class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">Collapsible Group Item #2 <i class="fa fa-angle-down"></i></a>
-						</h2>
-					</div>
-					<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
-						<div class="card-body">Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et.</div>
-					</div>
-				</div>
-				<div class="card">
-					<div class="card-header" id="headingThree">
-						<h2 class="mb-0">
-							<a class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">Collapsible Group Item #3 <i class="fa fa-angle-down"></i></a>
-						</h2>
-					</div>
-					<div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
-						<div class="card-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eu sem tempor, varius quam at, luctus dui. Mauris magna metus, dapibus nec turpis vel, semper malesuada ante. Vestibulum id metus ac nisl bibendum scelerisque non non purus. Suspendisse varius nibh non aliquet sagittis. In tincidunt orci sit amet elementum vestibulum.</div>
-					</div>
-				</div>
-				<div class="card">
-					<div class="card-header" id="headingFour">
-						<h2 class="mb-0">
-							<a class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">Collapsible Group Item #4 <i class="fa fa-angle-down"></i></a>
-						</h2>
-					</div>
-					<div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionExample">
-						<div class="card-body">Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et.</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+    <h2 font-family: "Roboto", sans-serif;>My Reviews:</h2>
+    <table class="w3-table w3-bordered w3-card-4 center" style="width:70%">
+      <?php foreach ($reviews as $item): ?>
+      <tr>
+          <div class="row">
+      		<div class="col-lg-8 offset-lg-2">
+      			<div class="accordion mt-5" id="accordionExample">
+      				<div class="card">
+      					<div class="card-header" id="headingOne">
+      						<h2 class="clearfix mb-0">
+      							<a class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne"><?php echo $item['Restaurant_name'];
+                                    if ($item['Rating'] == 1){
+                                        echo html_entity_decode($oneStar);
+                                    }
+                                    if ($item['Rating'] == 2){
+                                        echo html_entity_decode($twoStarsStar);
+                                    }
+                                    if ($item['Rating'] == 3){
+                                        echo html_entity_decode($threeStars);
+                                    }
+                                    if ($item['Rating'] == 4){
+                                        echo html_entity_decode($fourStars);
+                                    }
+                                    if ($item['Rating'] == 5){
+                                        echo html_entity_decode($fiveStars);
+                                    }?><i class="fa fa-angle-down"></i></a>
+      						</h2>
+      					</div>
+      					        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+      						<div class="card-body"><?php echo $item['Review_text']; ?></div>
+      					</div>
+      				</div>
+                </div>
+            </div>
+        </div>
+      </tr>
+      <?php endforeach; ?>
+    </table>
+
+</div>
 </div>
 </body>
 </html>
