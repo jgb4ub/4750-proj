@@ -32,7 +32,6 @@ $password = 'DbMs1234#';
 $host = 'usersrv01.cs.virginia.edu';
 $dbname = 'les6ye_restaurant_data';
 
-
 /******************************/
 
 $dsn = "mysql:host=$host;dbname=$dbname";

@@ -71,6 +71,9 @@ function authenticate($username, $password)
             
             if(crypt($password, $hashed_password)== $hashed_password){
               $auth = TRUE;
+              echo 'authenticated';
+                session_start();
+                $_SESSION['username'] = $username;
               $stmt->closeCursor();
             }
           }
