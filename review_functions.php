@@ -83,9 +83,21 @@ function getReviewById($review_id)
 
 
 
+ //THE HARD CODED ONE THAT EXECUTES - for testing connection between review.php and review_function
+function updateReview()
+{
+
+echo " inside updateReviewWWWWWWWWW/";
+
+global $db;
+
+	$query = "UPDATE Review SET Review_text='THIS IS HARD CODED' WHERE Review_id=2";
+    $statement = $db->prepare($query);
+	$statement->execute();
+}
 
 
-
+// COMMENTED OUT CAUSE IT DOESN'T WORK
 
 /*
 function updateReview($review_id, $review_text, $rating, $date)
@@ -111,28 +123,28 @@ function updateReview($review_id, $review_text, $rating, $date)
 */
 
 
-
-
-
-
-
-
-
- //the working one
-
-
+// COMMENTED OUT CAUSE IT DOESN'T WORK
+/*
 function updateReview($review_id, $username, $restaurant_id, $restaurant_name, $review_text, $rating, $date, $liked)
+
+
 {
 
-echo " hjklhjklhjklhjk/";
+    echo " inside updateReview/"
+	global $db;
 
-global $db;
 
-	//$query = "UPDATE Review SET Review_text='teeeeeeeeeeeeeeeeesting' WHERE Review_id=2";
-	$query = "UPDATE Review SET Username = :username, Restaurant_id = :restaurant_id, Restaurant_name = :restaurant_name, Review_text=:review_text, Rating=:rating, Date= :date, Liked = :liked WHERE Review_id=:review_id";
-    $statement = $db->prepare($query);
+	//INTENDED ONE
+    $query = "UPDATE Review SET Username = :username, Restaurant_id = :restaurant_id, Restaurant_name = :restaurant_name, Review_text=:review_text, Rating=:rating, Liked = :liked WHERE Review_id=:review_id";
 
-    $statement->bindValue(':review_id', $review_id);
+
+
+	//HARD CODED ONE - works if function has no parameters
+	//$query = "UPDATE Review SET Username = 'new1', Restaurant_id = '33', Restaurant_name = '22rest', Review_text='22test', Rating='33', Liked = 'false' WHERE Review_id= 2";
+	$statement = $db->prepare($query);
+
+
+	$statement->bindValue(':review_id', $review_id);
 	$statement->bindValue(':username', $username);
 	$statement->bindValue(':restaurant_id', $restaurant_id);
 	$statement->bindValue(':restaurant_name', $restaurant_name);
@@ -141,22 +153,15 @@ global $db;
 	$statement->bindValue(':date', $date);
 	$statement->bindValue(':liked', $liked);
 
-	$statement->execute();
+    echo " updateReview binded values/";
 
-	if ($statement->execute()){
-	echo " updateReview executed/";
-	}
-	else {
-	echo " updateReview couldn't execute/";
-	}
+	$statement->execute();
 
 	$statement->closeCursor();
 }
 
 
-
-
-
+*/
 
 
 

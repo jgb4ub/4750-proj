@@ -47,7 +47,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 	if (!empty($_POST['action']) && ($_POST['action'] == 'Confirm update'))
 	{
 
-		updateReview($_POST['review_id'], $_SESSION['username'], $_POST['restaurant_id'], $_POST['restaurant_name'], $_POST['review_text'], $_POST['rating'], $_POST['date'], $_POST['liked']);
+        //THIS IS THE INTENDED ONE
+		//updateReview($_POST['review_id'], $_SESSION['username'], $_POST['restaurant_id'], $_POST['restaurant_name'], $_POST['review_text'], $_POST['rating'], $_POST['date'], $_POST['liked']);
+
+
+		updateReview(); //HARD CODED
 
 		$reviews = getAllReviews($_SESSION["username"]); //update the table after updating the review
 
