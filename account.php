@@ -56,25 +56,32 @@ function displayUsers()
   return $results;
 }
 //
-// function authenticate($username, $password)
-// {
-//     global $db;
-//     $auth = FALSE;
-//     $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+function authenticate($username, $password)
+{
+    global $db;
+    $auth = FALSE;
+    $query = 'SELECT * FROM User WHERE Username = :username';
 
-//     $query = 'SELECT * FROM User WHERE Username = :username AND Password = :password';
-//     if($stmt = $db->prepare($query)){
-//         $stmt->bindValue(':username', $username);
-//         $stmt->bindValue(':password', $hashed_password);
-//         if ($stmt->execute()){
-//           if($stmt->rowCount() == 1){
-//             $auth = TRUE;
-//             $stmt->closeCursor();
-//           }
-//         }
-//     }
-//     return $auth;
-// }
+    if($stmt = $db->prepare($query)){
+        $stmt->bindValue(':username', $username);
+        if ($stmt->execute()){
+          if($stmt->rowCount() == 1 ){
+            $row = $stmt->fetch();
+            $hashed_password = $row['Password'];
+
+            if(crypt($password, $hashed_password)== $hashed_password){
+              $auth = TRUE;
+
+              session_start();
+              $_SESSION['username'] = $username;
+
+              $stmt->closeCursor();
+            }
+          }
+        }
+    }
+    return $auth;
+}
 
 
 
