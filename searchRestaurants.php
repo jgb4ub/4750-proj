@@ -13,6 +13,7 @@ echo $_SESSION['username'];
          padding: 10px;
     }
  </style>
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css">
  </head>
  <body>
 <?php
@@ -57,7 +58,7 @@ function test_input($data) {
 
 <h2> Restaurants Found: </h2><hr><br><br>
 
-<table>
+<table class="table"> 
   <tr>
     <th>ID</th>
     <th>Name</th>
