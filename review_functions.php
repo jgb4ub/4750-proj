@@ -13,7 +13,7 @@ function getAllReviews($username)
 	$statement->execute();
 
 	if ($statement->execute()){
-	echo " getAllReview executed/";
+	#echo " getAllReview executed/";
 	}
 	else {
 	echo " getAllReview couldn't execute/";
@@ -22,7 +22,7 @@ function getAllReviews($username)
 	// fetchAll() returns an array for all of the rows in the result set
 	$results = $statement->fetchAll();
 
-	echo " fetched all (made array)/";
+	#echo " fetched all (made array)/";
 
 	// closes the cursor and frees the connection to the server so other SQL statements may be issued
 	$statement->closeCursor();
@@ -33,36 +33,37 @@ function getAllReviews($username)
 
 function addReview($review_id, $username, $restaurant_id, $restaurant_name, $review_text, $rating, $date, $liked)
 {
-	echo " inside addReview/";
+	#echo " inside addReview/";
 	global $db;
 
-	$query = $db->prepare("INSERT INTO Review VALUES(:review_id, :username, :restaurant_id, :restaurant_name, :review_text, :rating, :date, :liked)");
+	$query = $db->prepare("INSERT INTO Review VALUES(:review_id, :username, :restaurant_id, :restaurant_name, :review_text, :rating, :dat, :liked)");
 	$query->bindValue(':review_id', $review_id);
 	$query->bindValue(':username', $username);
 	$query->bindValue(':restaurant_id', $restaurant_id);
 	$query->bindValue(':restaurant_name', $restaurant_name);
 	$query->bindValue(':review_text', $review_text);
 	$query->bindValue(':rating', $rating);
-	$query->bindValue(':date', $date);
+	$query->bindValue(':dat', $date);
 	$query->bindValue(':liked', $liked);
 
-    echo " binded all values/";
+    #echo " binded all values/";
 
-	$query->execute();        // run query, if the statement is successfully executed, execute() returns true
+	#$query->execute();        // run query, if the statement is successfully executed, execute() returns true
 	                              // false otherwise
 	if ($query->execute()){
 	echo " addReview executed/";
 	}
 	else {
-	echo " addReview couldn't execute/";
+	echo " addReview couldn't execute";
 	}
 
 	$query->closeCursor();    // release hold on this connection
 
 
     //Josh's Code
+    //User_liked_restaurants
     if ($liked == "TRUE") {
-    echo 'likes';
+    #echo 'likes';
     $query = $db->prepare("INSERT INTO User_liked_restaurants VALUES (:username, :rest_id)");
     $query->bindValue(':username', $username);
 	$query->bindValue(':rest_id', $restaurant_id);
@@ -71,6 +72,13 @@ function addReview($review_id, $username, $restaurant_id, $restaurant_name, $rev
         echo 'successfully liked';
         }
     }
+
+    //Restaurant_rating stored odbc_procedure
+    $query = $db->prepare("CALL updateRating(?)");
+    $query->bindParam(1,$restaurant_id, PDO::PARAM_INT);
+    if($query->execute()){
+        echo "successfully updated uWu";
+    } else{ echo 'problem uwu';}
 
 }
 

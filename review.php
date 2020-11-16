@@ -28,7 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 		$_POST['rating'], $_POST['date'], $_POST['liked']);
 		$reviews = getAllReviews($_SESSION["username"]); // update the table after adding new review
 
-		print_r ($reviews); // show us what's in the user's table
+		#print_r ($reviews); // show us what's in the user's table
 	}
 
 
@@ -212,8 +212,3 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 </div>
 </body>
 </html>
-
-
-
-
-
