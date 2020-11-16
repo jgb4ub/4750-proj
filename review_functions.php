@@ -64,7 +64,7 @@ function addReview( $username, $restaurant_id, $restaurant_name, $review_text, $
     //User_liked_restaurants
     if ($liked == "TRUE") {
     #echo 'likes';
-    $query = $db->prepare("INSERT INTO User_liked_restaurants VALUES (:username, :rest_id) WHERE NOT EXISTS (SELECT * FROM User_liked_restaurants WHERE Username=:username AND Restaurant_id=:rest_id)");
+    $query = $db->prepare("INSERT INTO User_liked_restaurants VALUES (:username, :rest_id) WHERE NOT EXISTS (SELECT * FROM User_liked_restaurants WHERE Username = :username AND Restaurant_id = :rest_id)");
     $query->bindValue(':username', $username);
 	$query->bindValue(':rest_id', $restaurant_id);
 
@@ -73,17 +73,20 @@ function addReview( $username, $restaurant_id, $restaurant_name, $review_text, $
         }
     }
 
-
+    $query->closeCursor();
 
     //first insert restaurant in if not present
-    $query = $db->prepare("INSERT INTO Restaurant_rating VALUES(:r_id, :rating) WHERE NOT EXISTS (SELECT * FROM Restaurant_rating WHERE Restaurant_id = :r_id)");
-    $query->bindvalue(':r_id',$restaurant_id);
-    $query->bindvalue(':rating',$rating);
+    $query = $db->prepare("INSERT INTO Restaurant_rating  VALUES (:r_id, :rating) WHERE NOT EXISTS (SELECT * FROM Restaurant_rating WHERE Restaurant_id = :r_id)");
+    $query->bindvalue(':r_id', $restaurant_id);
+    $query->bindvalue(':rating', $rating);
     if($query->execute()){
         echo "successfully checked ";
     } else {
          echo 'problem checking ';
     }
+
+    $query->closeCursor();
+
 
     //Restaurant_rating stored procedure to update
     $query = $db->prepare("CALL updateRating(?)");
@@ -93,6 +96,43 @@ function addReview( $username, $restaurant_id, $restaurant_name, $review_text, $
     } else {
          echo 'problem updating';
     }
+
+
+
+    $query = "SELECT * FROM Review WHERE Username = :username AND Restaurant_id = :rest_id AND Review_text=:rev_text ";
+	$statement = $db->prepare($query);
+	$statement->bindValue(':username', $username);
+    $statement->bindValue(':rest_id', $restaurant_id);
+    $statement->bindValue(':rev_text', $review_text);
+	#$statement->execute();
+
+	if ($statement->execute()){
+	#echo " getAllReview executed/";
+    #echo "<br>checked in Reviews<br>";
+    $tmp = $statement->fetch(PDO::FETCH_ASSOC);
+    if (!empty($tmp)){
+        #echo '<br> in here now<br>';
+        $query = "INSERT INTO Restaurant_reviews VALUES (:r_id, :rev_id)";
+        $statement = $db->prepare($query);
+        $statement->bindValue(':r_id', $restaurant_id);
+        #echo $tmp['Review_id'];
+        $statement->bindValue(':rev_id', $tmp['Review_id']);
+        if ($statement->execute()){
+            #echo '<br>successive<br>';
+        }
+    }
+	}
+	else {
+	#echo " <br>review couldn't check<br>";
+	}
+
+	// fetchAll() returns an array for all of the rows in the result set
+
+
+	#echo " fetched all (made array)/";
+
+	// closes the cursor and frees the connection to the server so other SQL statements may be issued
+	$statement->closeCursor();
 
 }
 
