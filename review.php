@@ -50,8 +50,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
         //THIS IS THE INTENDED ONE
 		//updateReview($_POST['review_id'], $_SESSION['username'], $_POST['restaurant_id'], $_POST['restaurant_name'], $_POST['review_text'], $_POST['rating'], $_POST['date'], $_POST['liked']);
 
+        updateReview($_POST['review_id'], $_POST['review_text'], $_POST['rating'], $_POST['date']);
 
-		updateReview(); //HARD CODED
+        /*echo "review_id: " . $_POST['review_id,'];
+        echo "user: " . $_SESSION['username'];
+        echo "restid: " . $_POST['restaurant_id'];
+        echo "restname: " . $_POST['restaurant_name,'];
+        echo "reviewtext: " . $_POST['review_text,'];
+        echo "rating: " . $_POST['rating,'];
+        echo "date: " . $_POST['date,'];
+        echo "liked: " . $_POST['liked,'];*/
+
+
+
+		//updateReview(); //HARD CODED
 
 		$reviews = getAllReviews($_SESSION["username"]); //update the table after updating the review
 
@@ -159,7 +171,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
     <th width="25%">Liked</th>
     <th width="10%">Update?</th>
     <th width="10%">Delete?</th>
-  </tr>
+  <tr style="background-color:#B0B0B0">
   </thead>
   <?php foreach ($reviews as $item): ?>
   <tr>

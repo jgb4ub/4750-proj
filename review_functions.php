@@ -82,7 +82,7 @@ function getReviewById($review_id)
 }
 
 
-
+/*
  //THE HARD CODED ONE THAT EXECUTES - for testing connection between review.php and review_function
 function updateReview()
 {
@@ -94,8 +94,38 @@ global $db;
 	$query = "UPDATE Review SET Review_text='THIS IS HARD CODED' WHERE Review_id=2";
     $statement = $db->prepare($query);
 	$statement->execute();
+
+	if ($statement->execute()){
+	echo " updateReview executed/";
+	}
+	else {
+	echo " updateReview couldn't execute/";
+	}
 }
 
+*/
+
+
+function updateReview($review_id, $review_text, $rating, $date)
+{
+	global $db;
+
+	$query = "UPDATE Review SET Review_text=:review_text, Rating=:rating WHERE Review_id=:review_id";
+	$statement = $db->prepare($query);
+	$statement->bindValue(':review_id', $review_id);
+	$statement->bindValue(':review_text', $review_text);
+	$statement->bindValue(':rating', $rating);
+	#$statement->bindValue(':date', $date);
+	#$statement->execute();
+
+	if ($statement->execute()){
+	echo " updateReview executed/";
+	}
+	else {
+	echo " updateReview couldn't execute/";
+	}
+	$statement->closeCursor();
+}
 
 // COMMENTED OUT CAUSE IT DOESN'T WORK
 
@@ -126,8 +156,6 @@ function updateReview($review_id, $review_text, $rating, $date)
 // COMMENTED OUT CAUSE IT DOESN'T WORK
 /*
 function updateReview($review_id, $username, $restaurant_id, $restaurant_name, $review_text, $rating, $date, $liked)
-
-
 {
 
     echo " inside updateReview/"
@@ -188,5 +216,58 @@ function deleteReview($review_id)
 	$statement->closeCursor();  // release hold on this connection
 }
 
+
+function avgRating($username)
+{
+
+
+    global $db;
+    $query = "SELECT Username, AVG(Rating) Avg_rating FROM Review WHERE Username = :username";
+    $statement = $db->prepare($query);
+    $statement->bindValue(':username', $username);
+
+    $statement->execute();
+
+    $results = $statement->fetch();
+
+    $statement->closeCursor();
+
+    return $results;
+
+}
+
+
+function raterExists($username)
+{
+
+    global $db;
+  $stmt = $db->prepare("SELECT username FROM User_avg_rating WHERE Username = :username");
+  $stmt-> bindValue(':username', $username);
+
+  if ($stmt->execute()){
+
+    if ($stmt->rowCount()==1){
+      $stmt->closeCursor();
+      return TRUE;
+    }
+  }
+  return FALSE;
+
+}
+
+function addRater($username, $avg)
+{
+
+    global $db;
+    $query = "INSERT INTO User_avg_rating VALUES(:username, :avg)";
+    $statement = $db->prepare($query);
+
+    $statement->bindValue(':username', $username);
+    $statement->bindValue(':avg', $avg);
+    $statement->execute();
+	$statement->closeCursor();
+
+
+}
 
  ?>
