@@ -23,6 +23,7 @@ function makeAccount($username, $password, $first_name, $last_name, $email)
     $sql = $db->prepare('INSERT INTO User_avg_rating VALUES (:username, 0)');
     $sql->bindValue(':username', $username);
     $sql->execute();
+    $sql->closeCursor();
 }
 
 function userExists($username)
