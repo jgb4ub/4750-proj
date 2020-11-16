@@ -7,8 +7,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
   $username = trim($_POST['username']);
   $password = trim($_POST['password']);
   if (authenticate($username, $password)){
-    echo "yayyy";
-    /// add redirect link to profile.php
+    header('Location: http://cs.virginia.edu/~les6ye/CS4750/project/profile.php');
   } else {
     $login_err = "Invalid username or password.";
   }
