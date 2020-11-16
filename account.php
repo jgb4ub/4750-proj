@@ -11,14 +11,19 @@ function makeAccount($username, $password, $first_name, $last_name, $email)
     $query->bindValue(":first_name", $first_name);
     $query->bindValue(":last_name", $last_name);
     $query->bindValue(":email", $email);
-    echo "hi";
+    //echo "hi";
+
     if ($query->execute()){
-    echo "this happened";
+    //echo "this happened";
     }
     else {
     echo "Unable to create record";
     }
     $query->closeCursor();
+    $sql = $db->prepare('INSERT INTO User_avg_rating VALUES (:username, 0)');
+    $sql->bindValue(':username', $username);
+    $sql->execute();
+    $sql->closeCursor();
 }
 
 function userExists($username)
