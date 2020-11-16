@@ -84,6 +84,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css">
   <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <style>
+  .logoutLblPos{
+
+     position:fixed;
+     right:10px;
+     top:5px;
+  }
+  </style>
+  <form align="right" method="post" action=' http://cs.virginia.edu/~les6ye/CS4750/project/profile.php'>
+ 	<label class='logoutLblPos'>
+ 		<input name='Profile' type='submit' value='Profile'>
+ 	</label>
+ </form>
 </head>
 
 <body>
