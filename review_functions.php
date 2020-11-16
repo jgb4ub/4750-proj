@@ -31,13 +31,13 @@ function getAllReviews($username)
 
 }
 
-function addReview( $username, $restaurant_id, $restaurant_name, $review_text, $rating, $date, $liked)
+function addReview($review_id, $username, $restaurant_id, $restaurant_name, $review_text, $rating, $date, $liked)
 {
 	#echo " inside addReview/";
 	global $db;
 
-	$query = $db->prepare("INSERT INTO Review (Username, Restaurant_id, Restaurant_name, Review_text, Rating, Date, Liked) VALUES( :username, :restaurant_id, :restaurant_name, :review_text, :rating, :dat, :liked)");
-	#$query->bindValue(':review_id', $review_id);
+	$query = $db->prepare("INSERT INTO Review /**(Username, Restaurant_id, Restaurant_name, Review_text, Rating, Date, Liked)**/ VALUES( :review_id, :username, :restaurant_id, :restaurant_name, :review_text, :rating, :dat, :liked)");
+	$query->bindValue(':review_id', $review_id);
 	$query->bindValue(':username', $username);
 	$query->bindValue(':restaurant_id', $restaurant_id);
 	$query->bindValue(':restaurant_name', $restaurant_name);
@@ -179,6 +179,9 @@ global $db;
 function updateReview($review_id, $review_text, $rating, $date)
 {
 	global $db;
+    //roundabout code
+    $query = "SELECT * FROM  Review WHERE Review_text=:review_text, Rating=:rating WHERE Review_id=:review_id";
+	$statement = $db->prepare($query);
 
 	$query = "UPDATE Review SET Review_text=:review_text, Rating=:rating WHERE Review_id=:review_id";
 	$statement = $db->prepare($query);
