@@ -65,6 +65,7 @@ function test_input($data) {
     <th>Phone</th>
     <th>Price</th>
     <th>Like?</th>
+    <th>Page</th>
   </tr>
 
 <?php
@@ -74,12 +75,15 @@ if ($restaurantList){
 
         echo '<tr>';
         foreach ($restaurant as $att){
-            echo '<td>'.$att.'</td>';
+            echo '<td>'.htmlspecialchars($att).'</td>';
 
         }
         ?>
         <form method="post" action="userLikedRestaurants.php">
         <td><input type="hidden" name="like_id" value="<?php echo $restaurant['Restaurant_id']; ?>"><input type="submit" class="form-control" name="like" value="Like"></td>
+        </form>
+        <form method="post" action="restaurantView.php">
+        <td><input type="hidden" name="rest_id" value="<?php echo $restaurant['Restaurant_id']; ?>"><input type="submit" class="form-control" name="View" value="View"></td>
         </form>
         <?php
         echo '</tr>';
