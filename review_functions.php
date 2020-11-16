@@ -89,8 +89,7 @@ function addReview($review_id, $username, $restaurant_id, $restaurant_name, $rev
 
 
     //Restaurant_rating stored procedure to update
-    $query = $db->prepare("CALL updateRating(?)");
-    $query->bindValue(1,$restaurant_id);
+    $query = $db->prepare("CALL updateRating()");
     if($query->execute()){
         echo "successfully updated ";
     } else {
