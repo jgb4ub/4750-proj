@@ -31,13 +31,13 @@ function getAllReviews($username)
 
 }
 
-function addReview($review_id, $username, $restaurant_id, $restaurant_name, $review_text, $rating, $date, $liked)
+function addReview( $username, $restaurant_id, $restaurant_name, $review_text, $rating, $date, $liked)
 {
 	#echo " inside addReview/";
 	global $db;
 
-	$query = $db->prepare("INSERT INTO Review VALUES(:review_id, :username, :restaurant_id, :restaurant_name, :review_text, :rating, :dat, :liked)");
-	$query->bindValue(':review_id', $review_id);
+	$query = $db->prepare("INSERT INTO Review (Username, Restaurant_id, Restaurant_name, Review_text, Rating, Date, Liked) VALUES( :username, :restaurant_id, :restaurant_name, :review_text, :rating, :dat, :liked)");
+	#$query->bindValue(':review_id', $review_id);
 	$query->bindValue(':username', $username);
 	$query->bindValue(':restaurant_id', $restaurant_id);
 	$query->bindValue(':restaurant_name', $restaurant_name);
@@ -64,7 +64,7 @@ function addReview($review_id, $username, $restaurant_id, $restaurant_name, $rev
     //User_liked_restaurants
     if ($liked == "TRUE") {
     #echo 'likes';
-    $query = $db->prepare("INSERT INTO User_liked_restaurants VALUES (:username, :rest_id)");
+    $query = $db->prepare("INSERT INTO User_liked_restaurants VALUES (:username, :rest_id) WHERE NOT EXISTS (SELECT * FROM User_liked_restaurants WHERE Username=:username AND Restaurant_id=:rest_id)");
     $query->bindValue(':username', $username);
 	$query->bindValue(':rest_id', $restaurant_id);
 
@@ -87,7 +87,7 @@ function addReview($review_id, $username, $restaurant_id, $restaurant_name, $rev
 
     //Restaurant_rating stored procedure to update
     $query = $db->prepare("CALL updateRating(?)");
-    $query->bindParam(1,$restaurant_id);
+    $query->bindValue(1,$restaurant_id);
     if($query->execute()){
         echo "successfully updated ";
     } else {
