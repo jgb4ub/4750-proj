@@ -64,7 +64,7 @@ function renderRestaurantReviews($id){
       if($stmt->execute([$id]))
       {
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        echo "showing all reviews";
+        #echo "showing all reviews";
         #foreach ($result as $show){foreach ($show as $shows){echo '<br>'.$shows;}echo "<br>";}
       }
     };
@@ -81,7 +81,7 @@ function renderRestaurant($id){
       if($stmt->execute([$id]))
       {
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
-        echo "showing all reviews";
+        #echo "showing all reviews";
         #foreach ($result as $show){foreach ($show as $shows){echo '<br>'.$shows;}echo "<br>";}
       }
     };

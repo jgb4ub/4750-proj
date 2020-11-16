@@ -17,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
     if ($_POST['rev_id']){
         userLikeReview($_POST['rev_id']);
     }
-    else if ($_POST['rest_id']){
+    if (isset($_POST['rest_id'])) {
         $revs = renderRestaurantReviews($_POST['rest_id']);
         $rest = renderRestaurant($_POST['rest_id']);
 
@@ -44,7 +44,11 @@ if ($revs != ''){
         echo '<br><h4>'.$rev['Username'].'</h4>'.'<p>'.$rev['Review_text'].'</p><br><br>';
         ?>
         <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
-        <td><input type="hidden" name="rev_id" value=<?php echo '"'.htmlspecialchars($rev['Review_id']).'"'; ?>><input type="submit" class="form-control" name="Like" value="Like"></td>
+        <td>
+            <input type="hidden" name="rest_id" value=<?php echo '"'.htmlspecialchars($rest['Restaurant_id']).'"'; ?>>
+            <input type="hidden" name="rev_id" value=<?php echo '"'.htmlspecialchars($rev['Review_id']).'"'; ?>>
+            <input type="submit" class="form-control" name="Like" value="Like">
+        </td>
         </form>
     <?php
         #print_r($rev);
