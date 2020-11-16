@@ -24,11 +24,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 
 	else if (!empty($_POST['action']) && ($_POST['action'] == 'Submit'))
 	{
-		addReview($_POST['review_id'], $_SESSION["username"], $_POST['restaurant_id'], $_POST['restaurant_name'], $_POST['review_text'],
+		addReview( $_POST['review_id'], $_SESSION["username"], $_POST['restaurant_id'], $_POST['restaurant_name'], $_POST['review_text'],
 		$_POST['rating'], $_POST['date'], $_POST['liked']);
 		$reviews = getAllReviews($_SESSION["username"]); // update the table after adding new review
 
-		print_r ($reviews); // show us what's in the user's table
+		#print_r ($reviews); // show us what's in the user's table
 	}
 
 
@@ -98,10 +98,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
   <div class="form-group" >
     <label> Review Id </label>
     <input style="width: 200px"; type="number" class="form-control" name="review_id"
-     value="<?php if ($review_to_update!=null) echo $review_to_update[0] ?>"
-
-    />
-  </div>
+     value="<?php if ($review_to_update!=null) echo $review_to_update[0] ?>"/>
+</div>
 
 
   <div class="form-group">
@@ -212,8 +210,3 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 </div>
 </body>
 </html>
-
-
-
-
-

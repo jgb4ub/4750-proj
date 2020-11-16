@@ -9,9 +9,9 @@ function makeRestaurant($name, $type, $phone, $price){
     #$query->bindValue(":food_type", $type);
     #$query->bindValue(":phone_number", $phone);
     #$query->bindValue(":price", $price);
-    echo "hi";
+    #echo "hi";
     if ($query->execute(['name' => $name, 'food_type' => $type, 'phone_number' => $phone, 'price' => $price])){
-    echo "this happened";
+    echo "Restaurant added";
     }
     else {
     echo "Unable to create record";
@@ -52,5 +52,39 @@ function filterRestaurants($name){
     }
     $query->closeCursor();
     return $val;
+}
+
+function renderRestaurantReviews($id){
+    global $db;
+    $result = null;
+    $query = 'SELECT * FROM Review WHERE Restaurant_id = ?';
+    #$query->bindValue(":r_id", $id);
+    if($stmt = $db->prepare($query))
+    {
+      if($stmt->execute([$id]))
+      {
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        #echo "showing all reviews";
+        #foreach ($result as $show){foreach ($show as $shows){echo '<br>'.$shows;}echo "<br>";}
+      }
+    };
+    return $result;
+}
+
+function renderRestaurant($id){
+    global $db;
+    $result = null;
+    $query = 'SELECT * FROM Restaurant WHERE Restaurant_id = ?';
+    #$query->bindValue(":r_id", $id);
+    if($stmt = $db->prepare($query))
+    {
+      if($stmt->execute([$id]))
+      {
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        #echo "showing all reviews";
+        #foreach ($result as $show){foreach ($show as $shows){echo '<br>'.$shows;}echo "<br>";}
+      }
+    };
+    return $result;
 }
  ?>
