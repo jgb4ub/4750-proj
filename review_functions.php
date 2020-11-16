@@ -73,12 +73,26 @@ function addReview($review_id, $username, $restaurant_id, $restaurant_name, $rev
         }
     }
 
-    //Restaurant_rating stored odbc_procedure
-    $query = $db->prepare("CALL updateRating(?)");
-    $query->bindParam(1,$restaurant_id, PDO::PARAM_INT);
+
+
+    //first insert restaurant in if not present
+    $query = $db->prepare("INSERT INTO Restaurant_rating VALUES(:r_id, :rating) WHERE NOT EXISTS (SELECT * FROM Restaurant_rating WHERE Restaurant_id = :r_id)");
+    $query->bindvalue(':r_id',$restaurant_id);
+    $query->bindvalue(':rating',$rating);
     if($query->execute()){
-        echo "successfully updated uWu";
-    } else{ echo 'problem uwu';}
+        echo "successfully checked ";
+    } else {
+         echo 'problem checking ';
+    }
+
+    //Restaurant_rating stored procedure to update
+    $query = $db->prepare("CALL updateRating(?)");
+    $query->bindParam(1,$restaurant_id);
+    if($query->execute()){
+        echo "successfully updated ";
+    } else {
+         echo 'problem updating';
+    }
 
 }
 
