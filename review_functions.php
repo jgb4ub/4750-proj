@@ -51,10 +51,10 @@ function addReview( $username, $restaurant_id, $restaurant_name, $review_text, $
 	#$query->execute();        // run query, if the statement is successfully executed, execute() returns true
 	                              // false otherwise
 	if ($query->execute()){
-	echo " addReview executed/";
+	#echo " addReview executed/";
 	}
 	else {
-	echo " addReview couldn't execute";
+	#echo " addReview couldn't execute";
 	}
 
 	$query->closeCursor();    // release hold on this connection

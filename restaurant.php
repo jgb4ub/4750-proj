@@ -9,9 +9,9 @@ function makeRestaurant($name, $type, $phone, $price){
     #$query->bindValue(":food_type", $type);
     #$query->bindValue(":phone_number", $phone);
     #$query->bindValue(":price", $price);
-    echo "hi";
+    #echo "hi";
     if ($query->execute(['name' => $name, 'food_type' => $type, 'phone_number' => $phone, 'price' => $price])){
-    echo "this happened";
+    echo "Restaurant added";
     }
     else {
     echo "Unable to create record";
