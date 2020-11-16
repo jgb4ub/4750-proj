@@ -35,13 +35,16 @@ if (isset($_POST['rest_id'])){
     echo '<h4>'.htmlspecialchars($rest['Phone_number']);
 }
 ?>
+<head>
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css">
+</head>
 
 <br><br>
 
 <?php
 if ($revs != ''){
     foreach ($revs as $rev){
-        echo '<br><h4>'.$rev['Username'].'</h4>'.'<p>'.$rev['Review_text'].'</p><br><br>';
+        echo '<br><div class="col-md-6 z-card mx-auto"><h4>'.$rev['Username'].'</h4>'.'<p>'.$rev['Review_text'].'</p></div><br><br>';
         ?>
         <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
         <td>
