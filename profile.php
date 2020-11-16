@@ -2,15 +2,14 @@
 // Include config file
 require("projectconnectdb.php");
 require("profilefunctions.php");
-//session_start();
-//$username = $_SESSION['username'];
-//$restaurantResults = getReviewedRestaurants("byakobowitzl");
-$reviews = getReviews("byakobowitzl");
-$likedreviews = getLikedReviews("byakobowitzl");
-$likedrestaurants = getLikedRestaurants("byakobowitzl");
+session_start();
+$un = $_SESSION['username'];
+
+$reviews = getReviews($un);
+$likedreviews = getLikedReviews($un);
+$likedrestaurants = getLikedRestaurants($un);
 //$reviewedrest = getReviewedRestaurants("byakobowitzl");
-$avgRating = getAverageRating("byakobowitzl");
-$username = "byakobowitzl";
+$avgRating = getAverageRating($un);
 
 $oneStar = " &#9733";
 $twoStars = " &#9733 &#9733";
@@ -101,7 +100,7 @@ $(document).ready(function(){
         <h2>My Profile<h2>
     </div> -->
     <div>
-        <p class = "text">You are currently logged in as: <?php echo $username ?></p>
+        <p class = "text">You are currently logged in as: <?php echo $un ?></p>
         <p class = "text">Your average rating across all restaurants is: <?php foreach ($avgRating as $item): echo $item['Avg_rating']; endforeach ?></p>
         <!-- <p class = "text"><?php foreach ($reviewedrest as $item): echo $item['Restaurant_name']; endforeach ?></p> -->
     </div>
