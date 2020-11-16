@@ -12,8 +12,20 @@ echo $_SESSION['username'];
      th, td {
          padding: 10px;
     }
+    .logoutLblPos{
+
+       position:fixed;
+       right:10px;
+       top:5px;
+    }
  </style>
  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css">
+
+ <form align="right" method="post" action=' http://cs.virginia.edu/~les6ye/CS4750/project/profile.php'>
+	<label class='logoutLblPos'>
+		<input name='Profile' type='submit' value='Profile'>
+	</label>
+</form>
  </head>
  <body>
 <?php
@@ -58,7 +70,7 @@ function test_input($data) {
 
 <h2> Restaurants Found: </h2><hr><br><br>
 
-<table class="table"> 
+<table class="table">
   <tr>
     <th>ID</th>
     <th>Name</th>
