@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 /******************************/
 // connecting to GCP cloud SQL instance
 
